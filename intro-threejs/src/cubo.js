@@ -1,7 +1,8 @@
 import * as THREE from 'three';
 
 let camera, scene, renderer;
-let cube;
+let cube = null;
+let sphere = null;
 
 const init = () => {
   // Create a scene
@@ -28,36 +29,39 @@ const init = () => {
 }
 
 const createCube = () => {
-  // Create a cube
   const geometry = new THREE.BoxGeometry(1, 1, 1)
   const material = new THREE.MeshBasicMaterial({ 
     color: '#8e44ad',
    })
   cube = new THREE.Mesh(geometry, material);
-
+  cube.position.x = -2;
   scene.add(cube);
-
 }
 
+const createSphere = () => {
+  const geometry = new THREE.SphereGeometry(0.75, 50, 50)
+  const material = new THREE.MeshBasicMaterial({ 
+    color: '#f1c40f',
+   })
+  sphere = new THREE.Mesh(geometry, material);
+  sphere.position.x = 2;
+  scene.add(sphere);
+}
 
 
 const animate = () => {
   requestAnimationFrame( animate );
   renderer.render( scene, camera );
+
+  if(cube != null){
+    cube.rotation.x += 0.01;
+    cube.rotation.y += 0.01;
+  }
 }
 
 init();
 createCube();
+createSphere();
 animate();
 
-const cameraOnLeft = () => {
-  console.log('cameraOnLeft')
-  camera.position.x = 3;
-  camera.updateProjectionMatrix();
-}
 
-const cameraOnRight = () => {
-  console.log('cameraOnRight')
-  camera.position.x = -3;
-  camera.updateProjectionMatrix();
-}
