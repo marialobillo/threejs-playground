@@ -11,7 +11,7 @@ const init = () => {
   // Create a camera
   camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 100);
   camera.position.z = 6;
-  camera.position.x = 2;
+  camera.position.x = 0;
 
   // Create a renderer
   const canvas = document.querySelector('.webgl');
@@ -40,6 +40,7 @@ const createCube = () => {
 }
 
 
+
 const animate = () => {
   requestAnimationFrame( animate );
   renderer.render( scene, camera );
@@ -48,3 +49,15 @@ const animate = () => {
 init();
 createCube();
 animate();
+
+const cameraOnLeft = () => {
+  console.log('cameraOnLeft')
+  camera.position.x = 3;
+  camera.updateProjectionMatrix();
+}
+
+const cameraOnRight = () => {
+  console.log('cameraOnRight')
+  camera.position.x = -3;
+  camera.updateProjectionMatrix();
+}
