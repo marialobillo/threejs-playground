@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 
+// Create a scene
 const scene = new THREE.Scene();
 
 // Create a sphere
@@ -8,10 +9,14 @@ const material = new THREE.MeshStandardMaterial( {
   color: 0xffff83,
 
 });
-
+// Create a Mesh
 const mesh = new THREE.Mesh( geometry, material );
 
+// Add the sphere to the scene
 scene.add( mesh );
 
 // Create a directional light
-const camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 0.1, 1000 );
+const camera = new THREE.PerspectiveCamera( 50, 800, 600 );
+scene.add( camera );
+
+// Create a renderer with Antialiasing
