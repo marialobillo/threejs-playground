@@ -27,6 +27,10 @@ const init = () => {
   };
 
   renderer.setSize(sizes.width , sizes.height);
+
+  // Add a light
+  const light = new THREE.AmbientLight(0xffffff, 0.5);
+  scene.add(light);
 }
 
 const loadTexture = async () => {
