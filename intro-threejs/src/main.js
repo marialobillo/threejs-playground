@@ -19,4 +19,10 @@ scene.add( mesh );
 const camera = new THREE.PerspectiveCamera( 50, 800, 600 );
 scene.add( camera );
 
-// Create a renderer with Antialiasing
+// Renderer
+const canvas = document.querySelector('.webgl');
+const renderer = new THREE.WebGLRenderer({ canvas});
+
+// Render the scene
+renderer.setSize( 800, 600 );
+renderer.render( scene, camera );
