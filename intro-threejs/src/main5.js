@@ -30,10 +30,10 @@ const mouse = new THREE.Vector2();
 const onMouseMove = (event) => {
   event.preventDefault();
   mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-  mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+  mouse.y = (event.clientY / window.innerHeight) * 2 + 1;
 
-  camera.position.x = mouse.x * 3;
-  square1.position.x = mouse.x * -3;
+  scene.rotation.x = mouse.x * 3;
+  scene.rotation.y = mouse.y * 3;
 };
 
 window.addEventListener("mousemove", onMouseMove, false);

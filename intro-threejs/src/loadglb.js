@@ -2,6 +2,7 @@ import * as THREE from 'three';
 
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 
+
 let camera, scene, renderer;
 let cube = null;
 let textureBox = null;
@@ -13,9 +14,9 @@ const init = async () => {
   scene.background = new THREE.Color('#00a8ff');
 
   // Create a camera
-  camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 100);
-  camera.position.z = 10;
-  camera.position.x = 0;
+  camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 5000);
+  camera.position.z = 1;
+  camera.position.x = 10;
 
   // Create a renderer
   const canvas = document.querySelector('.webgl');
@@ -29,12 +30,6 @@ const init = async () => {
   };
 
   renderer.setSize(sizes.width , sizes.height);
-
-  const birdGLB = await loadGLB('./../public/models/bird_orange.glb');
-  console.log(birdGLB);
-  scene.add(birdGLB.scene);
-
-
 }
 
 
@@ -44,10 +39,11 @@ const loadGLB = async (url) => {
   return glb;
 }
 
+
 const createCube = () => {
   const geometry = new THREE.BoxGeometry(1, 1, 1)
   const material = new THREE.MeshBasicMaterial({ 
-    map: textureBox,
+    color: 0x003377,
    })
   cube = new THREE.Mesh(geometry, material);
   cube.position.x = -2;
@@ -67,7 +63,7 @@ const animate = () => {
 
 init();
 
-createCube();
+//createCube();
 animate();
 
 
