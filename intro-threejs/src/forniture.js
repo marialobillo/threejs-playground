@@ -3,8 +3,10 @@ import * as THREE from 'three';
 import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader'
 
 let camera, scene, renderer;
-let tractor = null;
-let raycaster = new THREE.Raycaster();
+let chair1 = null;
+let chair2 = null;
+let chair3 = null;
+let chair4 = null;
 let mouse = new THREE.Vector2();
 
 
@@ -14,7 +16,7 @@ const init = async () => {
   scene.background = new THREE.Color('#00a8ff');
 
   // Create a camera
-  camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 100);
+  camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.1, 100);
   camera.position.z = 6;
   camera.position.x = 0;
  
@@ -33,48 +35,30 @@ const init = async () => {
   renderer.setSize(sizes.width , sizes.height);
 
 
-  // const tractorFBX = await loadFBX('./../public/models/car.fbx');
-  // console.log(tractorFBX);
-  // scene.add(tractorFBX.scene);
-
-  // fbx loader
-  // let fbxLoader = new FBXLoader()
-  // fbxLoader.load(
-  //     './../public/models/car.fbx',
-  //     (object) => {
-  //         tractor = object
-  //         scene.add(tractor)
-  //     },
-  //     (xhr) => {
-  //         console.log((xhr.loaded / xhr.total) * 100 + '% loaded')
-  //     },
-  //     (error) => {
-  //         console.log(error)
-  //     }
-  // )
-  let car1 = await loadFBXObject('./../public/models/car.fbx');
-  let car2 = await loadFBXObject('./../public/models/car.fbx');
-  let car3 = await loadFBXObject('./../public/models/car.fbx');
-  let car4 = await loadFBXObject('./../public/models/car.fbx');
   
+  chair1 = await loadFBXObject('./../public/models/furniture/Bar_chair_2.fbx');
+  chair2 = await loadFBXObject('./../public/models/furniture/Bar_chair_2.fbx');
+  chair3 = await loadFBXObject('./../public/models/furniture/Bar_chair_2.fbx');
+  chair4 = await loadFBXObject('./../public/models/furniture/Bar_chair_2.fbx');
 
-  let lengthCar = 9;
-  let widthCar = 2.5;
-  let heightCar = 1.65;
+  chair1.position.set(0,-2, 1);
+  chair2.position.set(0,-2, -1);
+  chair3.position.set(1,-2, 0);
+  chair4.position.set(-1,-2, 0);
 
-  car4.position.x = - 10;
-  car4.position.y = 1.65;
+  //chair1.scale.set(0.01, 0.01, 0.01);
+  let table = await loadFBXObject('./../public/models/furniture/Wood_Table_74.fbx');
 
-  car1.translateOnAxis(new THREE.Vector3(1, 0, 0), -(lengthCar + 1.1));
-  car2.translateOnAxis(new THREE.Vector3(1, 0, 0), -4.66);
-  car3.translateOnAxis(new THREE.Vector3(1, 0, 0), 2);
-  car4.translateOnAxis(new THREE.Vector3(0, 1, 1), 1.65);
+  table.scale.set(0.04, 0.04, 0.04);
+  table.position.set(0, -2, 0);
+  table.rotation.y = THREE.MathUtils.degToRad(-40);
 
-  //let position = car1.position.copy(car2.matrixWorld.getPosition());
+  const side = 1.3;
+  chair1.position.set(side, -2, -side);
+  chair2.position.set(-side, -2, -side);
+  chair3.position.set(side, -2, side);
+  chair4.position.set(-side, -2, side);
 
-  console.log('position', car2.position.x);
-
-  
 }
 
 const onMouseMove = (event) => {
@@ -82,7 +66,7 @@ const onMouseMove = (event) => {
   mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
   mouse.y = (event.clientY / window.innerHeight) * 2 + 1;
 
-  //scene.rotation.x = mouse.x * 2;
+  scene.rotation.x = mouse.x * 2;
   //scene.rotation.y = mouse.y * 2;
   //camera.position.x += 0.02;
 };
@@ -98,6 +82,26 @@ const loadFBXObject = async (url) => {
 const animate = () => {
   requestAnimationFrame( animate );
   renderer.render( scene, camera );
+
+  // if(chair1 !== null){
+  //   //chair1.rotation.x += 0.01;
+  //   chair1.rotation.y += 0.01;
+  // }
+
+  // if(chair2 !== null){
+  //   //chair1.rotation.x += 0.01;
+  //   chair2.rotation.y += 0.01;
+  // }
+
+  // if(chair3 !== null){
+  //   //chair1.rotation.x += 0.01;
+  //   chair3.rotation.y += 0.01;
+  // }
+
+  // if(chair4 !== null){
+  //   //chair1.rotation.x += 0.01;
+  //   chair4.rotation.y += 0.01;
+  // }
 }
 
 
